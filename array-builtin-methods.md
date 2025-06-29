@@ -5,7 +5,9 @@ This guide covers all built-in methods for Python's array-like data structures i
 ## 1. Adding Elements Methods
 
 ### `append(x)`
+
 Adds a single element to the end of the list.
+
 ```python
 fruits = ['apple', 'banana']
 fruits.append('orange')
@@ -17,7 +19,9 @@ print(fruits)  # Output: ['apple', 'banana', 'orange', ['grape', 'mango']]
 ```
 
 ### `extend(iterable)`
+
 Adds all elements from an iterable (list, tuple, string, etc.) to the end of the list.
+
 ```python
 fruits = ['apple', 'banana']
 fruits.extend(['orange', 'grape'])
@@ -30,7 +34,9 @@ print(numbers)  # Output: [1, 2, 3, '4', '5']
 ```
 
 ### `insert(i, x)`
+
 Inserts an element at a specific position.
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 fruits.insert(1, 'grape')
@@ -48,7 +54,9 @@ print(fruits)  # Output: ['mango', 'apple', 'grape', 'banana', 'orange', 'kiwi']
 ## 2. Removing Elements Methods
 
 ### `remove(x)`
+
 Removes the first occurrence of the specified value. Raises ValueError if not found.
+
 ```python
 fruits = ['apple', 'banana', 'orange', 'banana']
 fruits.remove('banana')
@@ -59,7 +67,9 @@ print(fruits)  # Output: ['apple', 'orange', 'banana'] (only first 'banana' remo
 ```
 
 ### `pop(i=-1)`
+
 Removes and returns the element at the specified position (default is last element).
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 last = fruits.pop()
@@ -77,7 +87,9 @@ print(fruits)  # Output: ['banana']
 ```
 
 ### `clear()`
+
 Removes all elements from the list.
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 fruits.clear()
@@ -87,7 +99,9 @@ print(fruits)  # Output: []
 ## 3. Ordering Methods
 
 ### `sort(*, key=None, reverse=False)`
+
 Sorts the list in place.
+
 ```python
 # Basic sorting
 numbers = [3, 1, 4, 1, 5, 9, 2]
@@ -110,7 +124,9 @@ print(words)  # Output: ['Apple', 'banana', 'Cherry', 'date']
 ```
 
 ### `reverse()`
+
 Reverses the list in place.
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 fruits.reverse()
@@ -124,7 +140,9 @@ print(numbers)  # Output: [5, 4, 3, 2, 1]
 ## 4. Searching Methods
 
 ### `index(x, start=0, end=len(list))`
+
 Returns the index of the first occurrence of the specified value.
+
 ```python
 fruits = ['apple', 'banana', 'orange', 'banana']
 idx = fruits.index('banana')
@@ -139,7 +157,9 @@ print(idx)  # Output: 3
 ```
 
 ### `count(x)`
+
 Returns the number of occurrences of the specified value.
+
 ```python
 numbers = [1, 2, 3, 2, 2, 4, 2]
 count = numbers.count(2)
@@ -153,7 +173,9 @@ print(count)  # Output: 0
 ## 5. Copying Method
 
 ### `copy()`
+
 Returns a shallow copy of the list.
+
 ```python
 original = ['apple', 'banana', 'orange']
 copied = original.copy()
@@ -174,6 +196,7 @@ print(nested)   # Output: [[1, 2, 3], [3, 4]] (original also changed!)
 ## 6. List Operators and Other Operations
 
 ### Using `+` for Concatenation
+
 ```python
 list1 = [1, 2, 3]
 list2 = [4, 5, 6]
@@ -182,6 +205,7 @@ print(combined)  # Output: [1, 2, 3, 4, 5, 6]
 ```
 
 ### Using `*` for Repetition
+
 ```python
 numbers = [1, 2, 3]
 repeated = numbers * 3
@@ -189,6 +213,7 @@ print(repeated)  # Output: [1, 2, 3, 1, 2, 3, 1, 2, 3]
 ```
 
 ### Using `in` for Membership Testing
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 print('banana' in fruits)  # Output: True
@@ -196,12 +221,14 @@ print('grape' in fruits)   # Output: False
 ```
 
 ### Using `len()` for List Length
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 print(len(fruits))  # Output: 3
 ```
 
 ### Using `del` for Deletion
+
 ```python
 fruits = ['apple', 'banana', 'orange', 'grape']
 del fruits[1]
@@ -215,6 +242,7 @@ print(fruits)  # Output: ['apple']
 ## 7. List Comprehensions
 
 A powerful way to create lists:
+
 ```python
 # Basic list comprehension
 squares = [x**2 for x in range(5)]
@@ -234,7 +262,9 @@ print(matrix)  # Output: [[0, 1, 2], [1, 2, 3], [2, 3, 4]]
 Lists also have special methods that work behind the scenes:
 
 ### `__len__()`
+
 Called by `len()` function.
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 print(len(fruits))          # Output: 3
@@ -242,7 +272,9 @@ print(fruits.__len__())     # Output: 3 (direct call)
 ```
 
 ### `__getitem__(index)`
+
 Called for indexing and slicing.
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 print(fruits[1])            # Output: 'banana' (calls __getitem__)
@@ -250,7 +282,9 @@ print(fruits.__getitem__(1)) # Output: 'banana' (direct call)
 ```
 
 ### `__setitem__(index, value)`
+
 Called for item assignment.
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 fruits[1] = 'grape'         # Calls __setitem__
@@ -258,7 +292,9 @@ print(fruits)               # Output: ['apple', 'grape', 'orange']
 ```
 
 ### `__delitem__(index)`
+
 Called by `del` statement.
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 del fruits[1]               # Calls __delitem__
@@ -266,14 +302,18 @@ print(fruits)               # Output: ['apple', 'orange']
 ```
 
 ### `__contains__(item)`
+
 Called by `in` operator.
+
 ```python
 fruits = ['apple', 'banana', 'orange']
 print('banana' in fruits)   # Output: True (calls __contains__)
 ```
 
 ### `__add__(other)`
+
 Called by `+` operator.
+
 ```python
 list1 = [1, 2]
 list2 = [3, 4]
@@ -281,7 +321,9 @@ print(list1 + list2)        # Output: [1, 2, 3, 4] (calls __add__)
 ```
 
 ### `__mul__(n)`
+
 Called by `*` operator.
+
 ```python
 numbers = [1, 2]
 print(numbers * 3)          # Output: [1, 2, 1, 2, 1, 2] (calls __mul__)
@@ -292,6 +334,7 @@ print(numbers * 3)          # Output: [1, 2, 1, 2, 1, 2] (calls __mul__)
 Python's `array` module provides memory-efficient arrays for basic numeric types:
 
 ### Creating Arrays
+
 ```python
 from array import array
 
@@ -304,6 +347,7 @@ float_array = array('d', [1.1, 2.2, 3.3])
 ### Array Methods (Similar to Lists)
 
 #### `append(x)`
+
 ```python
 arr = array('i', [1, 2, 3])
 arr.append(4)
@@ -311,6 +355,7 @@ print(arr)  # Output: array('i', [1, 2, 3, 4])
 ```
 
 #### `extend(iterable)`
+
 ```python
 arr = array('i', [1, 2])
 arr.extend([3, 4, 5])
@@ -318,6 +363,7 @@ print(arr)  # Output: array('i', [1, 2, 3, 4, 5])
 ```
 
 #### `insert(i, x)`
+
 ```python
 arr = array('i', [1, 3])
 arr.insert(1, 2)
@@ -325,6 +371,7 @@ print(arr)  # Output: array('i', [1, 2, 3])
 ```
 
 #### `remove(x)`
+
 ```python
 arr = array('i', [1, 2, 3, 2])
 arr.remove(2)
@@ -332,6 +379,7 @@ print(arr)  # Output: array('i', [1, 3, 2])
 ```
 
 #### `pop(i=-1)`
+
 ```python
 arr = array('i', [1, 2, 3])
 val = arr.pop()
@@ -340,6 +388,7 @@ print(arr)  # Output: array('i', [1, 2])
 ```
 
 #### `index(x)`
+
 ```python
 arr = array('i', [1, 2, 3, 2])
 idx = arr.index(2)
@@ -347,6 +396,7 @@ print(idx)  # Output: 1
 ```
 
 #### `count(x)`
+
 ```python
 arr = array('i', [1, 2, 3, 2, 2])
 cnt = arr.count(2)
@@ -354,6 +404,7 @@ print(cnt)  # Output: 3
 ```
 
 #### `reverse()`
+
 ```python
 arr = array('i', [1, 2, 3])
 arr.reverse()
@@ -363,7 +414,9 @@ print(arr)  # Output: array('i', [3, 2, 1])
 ### Array-Specific Methods
 
 #### `buffer_info()`
+
 Returns (address, length) tuple giving current memory info.
+
 ```python
 arr = array('i', [1, 2, 3])
 info = arr.buffer_info()
@@ -371,7 +424,9 @@ print(info)  # Output: (address, 3)
 ```
 
 #### `byteswap()`
+
 Swaps the byte order of all items (useful for reading data from different endianness).
+
 ```python
 arr = array('i', [1, 256])
 arr.byteswap()
@@ -379,7 +434,9 @@ arr.byteswap()
 ```
 
 #### `tolist()`
+
 Converts array to ordinary list.
+
 ```python
 arr = array('i', [1, 2, 3])
 lst = arr.tolist()
@@ -388,7 +445,9 @@ print(type(lst))  # Output: <class 'list'>
 ```
 
 #### `tobytes()`
+
 Converts array to bytes object.
+
 ```python
 arr = array('i', [1, 2, 3])
 bytes_obj = arr.tobytes()
@@ -396,7 +455,9 @@ print(bytes_obj)  # Output: b'\x01\x00\x00\x00\x02\x00\x00\x00\x03\x00\x00\x00'
 ```
 
 #### `frombytes(bytes)`
+
 Appends items from bytes object.
+
 ```python
 arr = array('i')
 arr.frombytes(b'\x01\x00\x00\x00\x02\x00\x00\x00')
@@ -404,7 +465,9 @@ print(arr)  # Output: array('i', [1, 2])
 ```
 
 #### `tofile(file)`
+
 Writes array to a file object.
+
 ```python
 arr = array('i', [1, 2, 3])
 with open('array.bin', 'wb') as f:
@@ -412,7 +475,9 @@ with open('array.bin', 'wb') as f:
 ```
 
 #### `fromfile(file, n)`
+
 Reads n items from file object and appends.
+
 ```python
 arr = array('i')
 with open('array.bin', 'rb') as f:
@@ -421,7 +486,9 @@ print(arr)  # Output: array('i', [1, 2, 3])
 ```
 
 #### `fromlist(list)`
+
 Appends items from list.
+
 ```python
 arr = array('i', [1, 2])
 arr.fromlist([3, 4, 5])
@@ -431,14 +498,18 @@ print(arr)  # Output: array('i', [1, 2, 3, 4, 5])
 ### Array Attributes
 
 #### `typecode`
+
 The type code character used to create the array.
+
 ```python
 arr = array('i', [1, 2, 3])
 print(arr.typecode)  # Output: 'i'
 ```
 
 #### `itemsize`
+
 The size in bytes of one array item.
+
 ```python
 arr = array('i', [1, 2, 3])
 print(arr.itemsize)  # Output: 4 (on most systems)
@@ -450,7 +521,9 @@ print(arr_double.itemsize)  # Output: 8
 ## 10. Other Built-in Array-like Structures
 
 ### bytearray
+
 Mutable sequence of bytes.
+
 ```python
 # Create bytearray
 ba = bytearray(b'hello')
@@ -477,7 +550,9 @@ ba[0] = 74              # Change individual bytes
 ```
 
 ### memoryview
+
 Creates a view of another object's memory without copying.
+
 ```python
 # Create memoryview from bytes
 data = bytearray(b'hello world')
@@ -499,7 +574,9 @@ mv.hex()                # Convert to hex string
 ```
 
 ### collections.deque
+
 Double-ended queue optimized for appends/pops from both ends.
+
 ```python
 from collections import deque
 
@@ -531,6 +608,7 @@ print(dq)  # Output: deque([4, 1, 2, 3])
 ## Summary
 
 ### Python List Methods (11 core methods):
+
 - **Adding**: `append()`, `extend()`, `insert()`
 - **Removing**: `remove()`, `pop()`, `clear()`
 - **Ordering**: `sort()`, `reverse()`
@@ -538,28 +616,33 @@ print(dq)  # Output: deque([4, 1, 2, 3])
 - **Copying**: `copy()`
 
 ### Array Module Methods (17 methods + 2 attributes):
+
 - **List-like methods** (8): `append()`, `extend()`, `insert()`, `remove()`, `pop()`, `index()`, `count()`, `reverse()`
 - **Conversion methods** (6): `tolist()`, `tobytes()`, `tofile()`, `fromlist()`, `frombytes()`, `fromfile()`
 - **Special methods** (2): `buffer_info()`, `byteswap()`
 - **Attributes** (2): `typecode`, `itemsize`
 
 ### Bytearray Methods (20+ methods):
+
 - **List-like**: `append()`, `extend()`, `insert()`, `remove()`, `pop()`, `reverse()`, `clear()`, `count()`, `index()`
 - **Byte-specific**: `decode()`, `hex()`, `fromhex()`, `translate()`, `maketrans()`
 - **And more**: Similar to both lists and bytes objects
 
 ### Memoryview Methods (10+ methods):
+
 - **Conversion**: `tobytes()`, `tolist()`, `hex()`
 - **Properties**: `format`, `itemsize`, `ndim`, `shape`, `strides`
 - **Methods**: `cast()`, `release()`, and more
 
 ### collections.deque Methods (16 methods):
+
 - **Double-ended**: `append()`, `appendleft()`, `pop()`, `popleft()`
 - **Extension**: `extend()`, `extendleft()`
 - **Special**: `rotate()`, `reverse()`, `maxlen` property
 - **List-like**: `clear()`, `count()`, `index()`, `remove()`
 
 **Total**: Python provides 75+ methods across various array-like structures, each optimized for different use cases:
+
 - **Lists**: General-purpose, dynamic arrays
 - **array.array**: Memory-efficient for numeric types
 - **bytearray**: Mutable byte sequences

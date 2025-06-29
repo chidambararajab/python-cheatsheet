@@ -5,6 +5,7 @@ This guide covers all Python operators and ways of adding conditions with easy-t
 ## 1. Arithmetic Operators
 
 ### Addition (`+`)
+
 ```python
 # Numbers
 result = 5 + 3          # Output: 8
@@ -18,6 +19,7 @@ result = [1, 2] + [3, 4]  # Output: [1, 2, 3, 4]
 ```
 
 ### Subtraction (`-`)
+
 ```python
 result = 10 - 3         # Output: 7
 result = 5.5 - 2.5      # Output: 3.0
@@ -25,6 +27,7 @@ result = -5 - 3         # Output: -8
 ```
 
 ### Multiplication (`*`)
+
 ```python
 # Numbers
 result = 4 * 3          # Output: 12
@@ -38,6 +41,7 @@ result = [1, 2] * 3     # Output: [1, 2, 1, 2, 1, 2]
 ```
 
 ### Division (`/`)
+
 ```python
 result = 10 / 2         # Output: 5.0 (always returns float)
 result = 7 / 2          # Output: 3.5
@@ -45,6 +49,7 @@ result = 10 / 3         # Output: 3.3333...
 ```
 
 ### Floor Division (`//`)
+
 ```python
 result = 10 // 3        # Output: 3 (rounds down)
 result = -10 // 3       # Output: -4 (rounds down)
@@ -52,6 +57,7 @@ result = 10.5 // 2      # Output: 5.0
 ```
 
 ### Modulus (`%`)
+
 ```python
 result = 10 % 3         # Output: 1 (remainder)
 result = 20 % 6         # Output: 2
@@ -62,6 +68,7 @@ result = "Hello %s, you are %d years old" % ("Alice", 25)
 ```
 
 ### Exponentiation (`**`)
+
 ```python
 result = 2 ** 3         # Output: 8 (2 to the power of 3)
 result = 4 ** 0.5       # Output: 2.0 (square root)
@@ -71,6 +78,7 @@ result = 27 ** (1/3)    # Output: 3.0 (cube root)
 ## 2. Comparison Operators
 
 ### Equal to (`==`)
+
 ```python
 print(5 == 5)           # Output: True
 print("hello" == "hello")  # Output: True
@@ -79,6 +87,7 @@ print(5 == 3)           # Output: False
 ```
 
 ### Not equal to (`!=`)
+
 ```python
 print(5 != 3)           # Output: True
 print("hello" != "world")  # Output: True
@@ -86,6 +95,7 @@ print([1, 2] != [1, 2])    # Output: False
 ```
 
 ### Greater than (`>`)
+
 ```python
 print(5 > 3)            # Output: True
 print(2 > 5)            # Output: False
@@ -93,6 +103,7 @@ print("b" > "a")        # Output: True (lexicographic)
 ```
 
 ### Less than (`<`)
+
 ```python
 print(3 < 5)            # Output: True
 print(5 < 3)            # Output: False
@@ -100,6 +111,7 @@ print("apple" < "banana")  # Output: True
 ```
 
 ### Greater than or equal to (`>=`)
+
 ```python
 print(5 >= 5)           # Output: True
 print(5 >= 3)           # Output: True
@@ -107,6 +119,7 @@ print(2 >= 5)           # Output: False
 ```
 
 ### Less than or equal to (`<=`)
+
 ```python
 print(3 <= 5)           # Output: True
 print(5 <= 5)           # Output: True
@@ -116,7 +129,9 @@ print(7 <= 5)           # Output: False
 ## 3. Logical Operators
 
 ### `and`
+
 Returns True if both conditions are True.
+
 ```python
 # Basic usage
 print(True and True)    # Output: True
@@ -135,7 +150,9 @@ result = y != 0 and x/y > 2  # False (doesn't evaluate x/y)
 ```
 
 ### `or`
+
 Returns True if at least one condition is True.
+
 ```python
 # Basic usage
 print(True or False)    # Output: True
@@ -152,7 +169,9 @@ result = x > 0 or x/0 > 0  # True (doesn't evaluate x/0)
 ```
 
 ### `not`
+
 Reverses the boolean value.
+
 ```python
 print(not True)         # Output: False
 print(not False)        # Output: True
@@ -169,6 +188,7 @@ is_adult = not (age < 18)  # Output: False
 ## 4. Bitwise Operators
 
 ### Bitwise AND (`&`)
+
 ```python
 a = 5   # Binary: 0101
 b = 3   # Binary: 0011
@@ -181,6 +201,7 @@ result = set1 & set2  # Output: {2, 3}
 ```
 
 ### Bitwise OR (`|`)
+
 ```python
 a = 5   # Binary: 0101
 b = 3   # Binary: 0011
@@ -193,6 +214,7 @@ result = set1 | set2  # Output: {1, 2, 3}
 ```
 
 ### Bitwise XOR (`^`)
+
 ```python
 a = 5   # Binary: 0101
 b = 3   # Binary: 0011
@@ -205,6 +227,7 @@ result = set1 ^ set2  # Output: {1, 4}
 ```
 
 ### Bitwise NOT (`~`)
+
 ```python
 a = 5   # Binary: 0101
 result = ~a  # Output: -6 (inverts all bits)
@@ -215,6 +238,7 @@ print(~(-3)) # Output: 2
 ```
 
 ### Left Shift (`<<`)
+
 ```python
 a = 5   # Binary: 0101
 result = a << 1  # Output: 10 (Binary: 1010)
@@ -225,6 +249,7 @@ print(3 << 2)  # Output: 12 (3 * 2^2)
 ```
 
 ### Right Shift (`>>`)
+
 ```python
 a = 20  # Binary: 10100
 result = a >> 1  # Output: 10 (Binary: 1010)
@@ -237,6 +262,7 @@ print(16 >> 2)  # Output: 4 (16 / 2^2)
 ## 5. Assignment Operators
 
 ### Basic Assignment (`=`)
+
 ```python
 x = 5
 name = "Alice"
@@ -244,6 +270,7 @@ numbers = [1, 2, 3]
 ```
 
 ### Compound Assignment Operators
+
 ```python
 # Addition assignment
 x = 5
@@ -283,7 +310,9 @@ x >>= 2     # Same as: x = x >> 2, Result: 3
 ```
 
 ### Walrus Operator (`:=`) - Python 3.8+
+
 Assigns values within expressions.
+
 ```python
 # In while loops
 while (n := input("Enter number: ")) != "quit":
@@ -303,7 +332,9 @@ print(filtered)  # Output: [6, 8, 10]
 ## 6. Identity Operators
 
 ### `is`
+
 Checks if two variables refer to the same object in memory.
+
 ```python
 # With None
 x = None
@@ -328,7 +359,9 @@ print(x is y)           # Output: False (not cached)
 ```
 
 ### `is not`
+
 Checks if two variables don't refer to the same object.
+
 ```python
 x = [1, 2]
 y = [1, 2]
@@ -343,7 +376,9 @@ if value is not None:
 ## 7. Membership Operators
 
 ### `in`
+
 Checks if a value exists in a sequence.
+
 ```python
 # In strings
 print("h" in "hello")           # Output: True
@@ -365,7 +400,9 @@ print("apple" in fruits)        # Output: True
 ```
 
 ### `not in`
+
 Checks if a value doesn't exist in a sequence.
+
 ```python
 # In strings
 print("x" not in "hello")       # Output: True
@@ -384,6 +421,7 @@ if username not in banned_users:
 ## 8. Conditional Statements
 
 ### `if` Statement
+
 ```python
 age = 18
 if age >= 18:
@@ -391,6 +429,7 @@ if age >= 18:
 ```
 
 ### `if-else` Statement
+
 ```python
 age = 16
 if age >= 18:
@@ -400,6 +439,7 @@ else:
 ```
 
 ### `if-elif-else` Statement
+
 ```python
 score = 85
 
@@ -418,6 +458,7 @@ print(f"Your grade is: {grade}")  # Output: Your grade is: B
 ```
 
 ### Nested Conditions
+
 ```python
 age = 25
 has_license = True
@@ -432,6 +473,7 @@ else:
 ```
 
 ### Multiple Conditions
+
 ```python
 # Using and
 age = 25
@@ -530,6 +572,7 @@ print(categorize_number(7))    # Output: single digit
 ## 11. Special Conditional Constructs
 
 ### List Comprehension with Conditions
+
 ```python
 # Basic filtering
 numbers = [1, 2, 3, 4, 5, 6]
@@ -546,6 +589,7 @@ print(result)  # Output: [0, 6, 12, 18]
 ```
 
 ### Dictionary Comprehension with Conditions
+
 ```python
 # Filter dictionary
 scores = {"Alice": 85, "Bob": 72, "Charlie": 90, "David": 68}
@@ -554,6 +598,7 @@ print(passed)  # Output: {'Alice': 85, 'Bob': 72, 'Charlie': 90}
 ```
 
 ### Generator Expression with Conditions
+
 ```python
 # Memory efficient filtering
 numbers = range(1000)
@@ -562,6 +607,7 @@ print(sum(evens))  # Sum of even numbers from 0 to 998
 ```
 
 ### `all()` and `any()` Functions
+
 ```python
 # all() - returns True if all elements are True
 numbers = [2, 4, 6, 8]
@@ -578,6 +624,7 @@ if all(len(p) >= 8 for p in passwords):
 ```
 
 ### `filter()` Function
+
 ```python
 # Filter with function
 def is_positive(x):
@@ -595,6 +642,7 @@ print(evens)  # Output: [0, 2, 4, 6, 8]
 ## 12. Boolean Context
 
 ### Truthy and Falsy Values
+
 ```python
 # Falsy values
 falsy_values = [False, None, 0, 0.0, "", [], {}, set(), ()]
@@ -615,6 +663,7 @@ if 42:          # Non-zero number is truthy
 ```
 
 ### Short-Circuit Evaluation
+
 ```python
 # With 'and' - returns first falsy or last value
 result = "" and "hello"    # Output: ""
@@ -634,30 +683,39 @@ config = user_config or default_config
 ## Summary
 
 ### Arithmetic Operators (7)
+
 `+`, `-`, `*`, `/`, `//`, `%`, `**`
 
 ### Comparison Operators (6)
+
 `==`, `!=`, `>`, `<`, `>=`, `<=`
 
 ### Logical Operators (3)
+
 `and`, `or`, `not`
 
 ### Bitwise Operators (6)
+
 `&`, `|`, `^`, `~`, `<<`, `>>`
 
 ### Assignment Operators (13)
+
 `=`, `+=`, `-=`, `*=`, `/=`, `//=`, `%=`, `**=`, `&=`, `|=`, `^=`, `<<=`, `>>=`
 
 ### Special Assignment (1)
+
 `:=` (walrus operator)
 
 ### Identity Operators (2)
+
 `is`, `is not`
 
 ### Membership Operators (2)
+
 `in`, `not in`
 
 ### Conditional Constructs
+
 - `if`, `elif`, `else` statements
 - Ternary operator: `value_if_true if condition else value_if_false`
 - `match` statement (Python 3.10+)

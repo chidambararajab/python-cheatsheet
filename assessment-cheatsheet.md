@@ -5,6 +5,7 @@
 ### 1. Input/Output Patterns (Most Common on Guvi)
 
 #### Single Line Input
+
 ```python
 # Single integer
 n = int(input())
@@ -26,6 +27,7 @@ words = input().split()
 ```
 
 #### Multiple Lines Input
+
 ```python
 # First line: number of test cases
 t = int(input())
@@ -49,6 +51,7 @@ for i in range(rows):
 ```
 
 #### Output Formatting
+
 ```python
 # Print with space separation
 print(*list_name)  # Unpacks list elements
@@ -69,6 +72,7 @@ print("{:.2f}".format(float_value))
 ### 2. Common String Problems
 
 #### String Reversal
+
 ```python
 # Method 1: Slicing (fastest)
 reversed_str = s[::-1]
@@ -82,6 +86,7 @@ reversed_words = ' '.join(sentence.split()[::-1])  # "world hello"
 ```
 
 #### Palindrome Check
+
 ```python
 def is_palindrome(s):
     return s == s[::-1]
@@ -98,6 +103,7 @@ def is_palindrome_alphanumeric(s):
 ```
 
 #### Character Frequency
+
 ```python
 # Method 1: Using dictionary
 def char_frequency(s):
@@ -112,6 +118,7 @@ freq = Counter(s)
 ```
 
 #### Anagram Check
+
 ```python
 def are_anagrams(s1, s2):
     return sorted(s1) == sorted(s2)
@@ -125,6 +132,7 @@ def are_anagrams(s1, s2):
 ### 3. Array/List Manipulation
 
 #### Find Maximum/Minimum
+
 ```python
 # Basic
 max_val = max(arr)
@@ -145,6 +153,7 @@ def kth_smallest(arr, k):
 ```
 
 #### Array Rotation
+
 ```python
 # Left rotation by k positions
 def rotate_left(arr, k):
@@ -160,6 +169,7 @@ def rotate_right(arr, k):
 ```
 
 #### Subarray/Subset Problems
+
 ```python
 # Maximum subarray sum (Kadane's Algorithm)
 def max_subarray_sum(arr):
@@ -182,6 +192,7 @@ def all_subarrays(arr):
 ### 4. Number Problems
 
 #### Prime Number Check
+
 ```python
 def is_prime(n):
     if n < 2:
@@ -195,16 +206,17 @@ def is_prime(n):
 def sieve_of_eratosthenes(n):
     primes = [True] * (n + 1)
     primes[0] = primes[1] = False
-    
+
     for i in range(2, int(n**0.5) + 1):
         if primes[i]:
             for j in range(i*i, n + 1, i):
                 primes[j] = False
-    
+
     return [i for i in range(n + 1) if primes[i]]
 ```
 
 #### GCD and LCM
+
 ```python
 # Euclidean algorithm for GCD
 def gcd(a, b):
@@ -222,6 +234,7 @@ def lcm(a, b):
 ```
 
 #### Factorial
+
 ```python
 # Iterative
 def factorial(n):
@@ -240,6 +253,7 @@ def factorial_recursive(n):
 ```
 
 #### Fibonacci
+
 ```python
 # First n Fibonacci numbers
 def fibonacci(n):
@@ -247,7 +261,7 @@ def fibonacci(n):
         return []
     elif n == 1:
         return [0]
-    
+
     fib = [0, 1]
     for i in range(2, n):
         fib.append(fib[-1] + fib[-2])
@@ -266,6 +280,7 @@ def nth_fibonacci(n):
 ### 5. Pattern Printing
 
 #### Number Patterns
+
 ```python
 # Triangle pattern
 n = 5
@@ -274,10 +289,10 @@ for i in range(1, n + 1):
         print(j, end=" ")
     print()
 # Output:
-# 1 
-# 1 2 
-# 1 2 3 
-# 1 2 3 4 
+# 1
+# 1 2
+# 1 2 3
+# 1 2 3 4
 # 1 2 3 4 5
 
 # Pyramid pattern
@@ -285,14 +300,15 @@ n = 5
 for i in range(1, n + 1):
     print(" " * (n - i) + "* " * i)
 # Output:
-#     * 
-#    * * 
-#   * * * 
-#  * * * * 
+#     *
+#    * *
+#   * * *
+#  * * * *
 # * * * * *
 ```
 
 #### Character Patterns
+
 ```python
 # Alphabet triangle
 n = 5
@@ -305,6 +321,7 @@ for i in range(1, n + 1):
 ### 6. Searching Algorithms
 
 #### Linear Search
+
 ```python
 def linear_search(arr, target):
     for i in range(len(arr)):
@@ -314,10 +331,11 @@ def linear_search(arr, target):
 ```
 
 #### Binary Search
+
 ```python
 def binary_search(arr, target):
     left, right = 0, len(arr) - 1
-    
+
     while left <= right:
         mid = (left + right) // 2
         if arr[mid] == target:
@@ -332,6 +350,7 @@ def binary_search(arr, target):
 ### 7. Sorting Problems
 
 #### Built-in Sorting
+
 ```python
 # Sort list in place
 arr.sort()  # Ascending
@@ -350,6 +369,7 @@ students.sort(key=lambda x: (-x[1], x[0]))  # Sort by score desc, then name asc
 ```
 
 #### Quick Implementations
+
 ```python
 # Bubble Sort (simple but slow)
 def bubble_sort(arr):
@@ -375,6 +395,7 @@ def selection_sort(arr):
 ### 8. Dictionary/HashTable Problems
 
 #### Two Sum Problem
+
 ```python
 def two_sum(nums, target):
     seen = {}
@@ -387,6 +408,7 @@ def two_sum(nums, target):
 ```
 
 #### Frequency Counting
+
 ```python
 # Count occurrences
 def count_elements(arr):
@@ -473,29 +495,30 @@ s = s.lower()  # or s.upper()
 ### 12. Object-Oriented Programming (OOP)
 
 #### Basic Class Structure
+
 ```python
 class Person:
     # Class variable
     species = "Homo sapiens"
-    
+
     # Constructor
     def __init__(self, name, age):
         self.name = name  # Instance variable
         self.age = age
-    
+
     # Instance method
     def introduce(self):
         return f"Hi, I'm {self.name}, {self.age} years old"
-    
+
     # String representation
     def __str__(self):
         return f"Person(name={self.name}, age={self.age})"
-    
+
     # Static method
     @staticmethod
     def is_adult(age):
         return age >= 18
-    
+
     # Class method
     @classmethod
     def create_baby(cls, name):
@@ -508,12 +531,13 @@ baby = Person.create_baby("Bob")
 ```
 
 #### Inheritance
+
 ```python
 class Student(Person):
     def __init__(self, name, age, student_id):
         super().__init__(name, age)
         self.student_id = student_id
-    
+
     def study(self, subject):
         return f"{self.name} is studying {subject}"
 
@@ -625,23 +649,24 @@ url_pattern = r'https?://(?:www\.)?[a-zA-Z0-9./]+'
 ### 16. Data Structure Implementations
 
 #### Stack
+
 ```python
 class Stack:
     def __init__(self):
         self.items = []
-    
+
     def push(self, item):
         self.items.append(item)
-    
+
     def pop(self):
         return self.items.pop() if not self.is_empty() else None
-    
+
     def peek(self):
         return self.items[-1] if not self.is_empty() else None
-    
+
     def is_empty(self):
         return len(self.items) == 0
-    
+
     def size(self):
         return len(self.items)
 
@@ -652,19 +677,20 @@ top = stack.pop()  # pop
 ```
 
 #### Queue
+
 ```python
 from collections import deque
 
 class Queue:
     def __init__(self):
         self.items = deque()
-    
+
     def enqueue(self, item):
         self.items.append(item)
-    
+
     def dequeue(self):
         return self.items.popleft() if not self.is_empty() else None
-    
+
     def is_empty(self):
         return len(self.items) == 0
 
@@ -675,6 +701,7 @@ front = queue.popleft()  # dequeue
 ```
 
 #### Linked List
+
 ```python
 class Node:
     def __init__(self, data):
@@ -684,7 +711,7 @@ class Node:
 class LinkedList:
     def __init__(self):
         self.head = None
-    
+
     def append(self, data):
         new_node = Node(data)
         if not self.head:
@@ -694,12 +721,12 @@ class LinkedList:
         while current.next:
             current = current.next
         current.next = new_node
-    
+
     def prepend(self, data):
         new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
-    
+
     def display(self):
         elements = []
         current = self.head
@@ -1067,7 +1094,7 @@ with open('data.json', 'r') as f:
     loaded = json.load(f)
 ```
 
-### 29. Function Arguments (*args, **kwargs)
+### 29. Function Arguments (\*args, \*\*kwargs)
 
 ```python
 # *args - Variable positional arguments
@@ -1107,18 +1134,18 @@ def max_sum_subarray(arr, k):
     """Find maximum sum of subarray of size k"""
     window_sum = sum(arr[:k])
     max_sum = window_sum
-    
+
     for i in range(len(arr) - k):
         window_sum = window_sum - arr[i] + arr[i + k]
         max_sum = max(max_sum, window_sum)
-    
+
     return max_sum
 
 # Two pointers
 def two_sum_sorted(arr, target):
     """Find two numbers that sum to target in sorted array"""
     left, right = 0, len(arr) - 1
-    
+
     while left < right:
         current_sum = arr[left] + arr[right]
         if current_sum == target:
@@ -1135,10 +1162,10 @@ def range_sum_query(arr):
     prefix = [0]
     for num in arr:
         prefix.append(prefix[-1] + num)
-    
+
     def query(i, j):
         return prefix[j + 1] - prefix[i]
-    
+
     return query
 
 # Memoization
@@ -1152,6 +1179,7 @@ def fibonacci_memo(n, memo={}):
 ```
 
 ### 🚨 Last-Minute Checklist:
+
 1. **Input format** - Single line? Multiple lines? Check carefully
 2. **Output format** - Space-separated? New lines? Exact format matters
 3. **Data types** - Integer division (//) vs float division (/)
@@ -1160,11 +1188,13 @@ def fibonacci_memo(n, memo={}):
 6. **Python version** - Guvi usually uses Python 3.7+
 
 ### 📊 Estimated Problem Distribution:
+
 - **Easy (60%)**: Direct implementation, basic loops, simple conditions
 - **Medium (35%)**: Algorithms, data structures, optimization needed
 - **Hard (5%)**: Complex algorithms, dynamic programming
 
 ### 🎯 Time Management Strategy:
+
 - **0-5 min**: Read all problems, start with easiest
 - **5-35 min**: Solve problems (aim for 10-15 min each)
 - **35-45 min**: Debug, optimize, submit all attempts
