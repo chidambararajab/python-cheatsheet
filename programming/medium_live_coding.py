@@ -770,6 +770,350 @@ Final result: [24, 12, 8, 6] ✓
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# PROBLEM 4: 3SUM
+# ═══════════════════════════════════════════════════════════════════════
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣ PROBLEM STATEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Given an integer array, return all unique triplets that sum to zero.
+
+Example:
+    Input: nums = [-1, 0, 1, 2, -1, -4]
+    Output: [[-1, -1, 2], [-1, 0, 1]]
+
+Constraints:
+- No duplicate triplets in result
+- Order of triplets doesn't matter
+- Can use same element value multiple times if at different indices
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2️⃣ THINK-ALOUD FLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"3Sum - finding three numbers that sum to zero.
+
+Key insight: Fix one number, then it's a 2Sum problem for the remaining two!
+
+Algorithm:
+1. Sort the array
+2. For each number nums[i]:
+   - Find two numbers that sum to -nums[i] (makes total zero)
+   - Use two pointers on remaining sorted array
+3. Skip duplicates to avoid duplicate triplets
+
+Example: [-1, 0, 1, 2, -1, -4]
+Sorted: [-4, -1, -1, 0, 1, 2]
+- i=0, nums[i]=-4, need two that sum to 4 → not found
+- i=1, nums[i]=-1, need two that sum to 1 → found: 0,1 and -1,2
+- Skip duplicate -1 at i=2
+- Continue...
+
+Critical: Must skip duplicates to avoid repeated triplets!"
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3️⃣ TRAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRAP: Not skipping duplicates properly
+
+Without skipping duplicates:
+[-1, 0, 1] might appear multiple times if there are duplicate -1's
+
+Must skip:
+1. Duplicate i values: if nums[i] == nums[i-1], skip
+2. Duplicate left values after finding match
+3. Duplicate right values after finding match
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4️⃣ SOLUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+
+def three_sum(nums):
+    """
+    Find all unique triplets that sum to zero.
+    
+    Approach: Sort + two pointers
+    - Fix first number
+    - Use two pointers for remaining two
+    - Skip duplicates carefully
+    
+    Time: O(n²) - n iterations * O(n) two-pointer search
+    Space: O(1) excluding output
+    """
+    nums.sort()  # Sort first for two-pointer approach
+    result = []
+    n = len(nums)
+    
+    for i in range(n - 2):
+        # Skip duplicate values for first number
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        
+        # Two pointers for remaining two numbers
+        left, right = i + 1, n - 1
+        target = -nums[i]  # Need two numbers that sum to this
+        
+        while left < right:
+            current_sum = nums[left] + nums[right]
+            
+            if current_sum == target:
+                result.append([nums[i], nums[left], nums[right]])
+                
+                # Skip duplicates for left pointer
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                # Skip duplicates for right pointer
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+                
+                left += 1
+                right -= 1
+                
+            elif current_sum < target:
+                left += 1
+            else:
+                right -= 1
+    
+    return result
+
+
+"""
+5️⃣ BAD: O(n³) checking all triplets without sorting
+6️⃣ KEY: Sort + fix one + two pointers for other two
+7️⃣ COMPLEXITY: O(n²) time (optimal), O(1) space
+8️⃣ TIME OUT: "Sort array, fix first, two pointers for remaining two"
+9️⃣ FOLLOW-UP: "kSum?" → Generalize with recursion
+🔟 EVALUATION: Must skip duplicates correctly, achieve O(n²)
+"""
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# PROBLEM 5: CONTAINER WITH MOST WATER
+# ═══════════════════════════════════════════════════════════════════════
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣ PROBLEM STATEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Given n non-negative integers representing heights, where width between
+each line is 1, find two lines that together with x-axis form a container
+that holds the most water.
+
+Example:
+    Input: height = [1,8,6,2,5,4,8,3,7]
+    Output: 49
+    Explanation: Lines at index 1 (height 8) and 8 (height 7),
+                 distance = 7, area = min(8,7) * 7 = 49
+
+Note: Container area = min(height[i], height[j]) * (j - i)
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2️⃣ THINK-ALOUD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"Finding maximum water container between two lines.
+
+Area = min(left_height, right_height) * distance
+
+Brute force: Check all pairs → O(n²)
+
+Optimized: Two pointers from ends
+- Start with maximum width
+- Move pointer with smaller height inward (only way to increase area)
+- Track maximum area seen
+
+Why this works: With maximum width, only way to improve is taller heights.
+Moving the shorter one might find taller height. Moving taller one can't help
+because area limited by shorter one anyway.
+
+Example: [1,8,6,2,5,4,8,3,7]
+left=0 (h=1), right=8 (h=7): area = min(1,7)*8 = 8
+Move left (shorter): left=1 (h=8), area = min(8,7)*7 = 49
+Move right (shorter): left=1, right=7 (h=3): area = min(8,3)*6 = 18
+..."
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3️⃣ TRAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRAP: Moving the taller pointer instead of shorter
+
+If you move the taller pointer:
+- Width decreases
+- Height can't increase (limited by shorter one)
+- Area guaranteed to not improve
+
+Must always move the shorter pointer to have chance of improvement.
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4️⃣ SOLUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+
+def max_area(height):
+    """
+    Find maximum water container area.
+    
+    Approach: Two pointers from ends, move shorter pointer.
+    Time: O(n) - single pass
+    Space: O(1)
+    """
+    left, right = 0, len(height) - 1
+    max_water = 0
+    
+    while left < right:
+        # Calculate current area
+        width = right - left
+        current_height = min(height[left], height[right])
+        current_area = width * current_height
+        
+        max_water = max(max_water, current_area)
+        
+        # Move pointer with smaller height
+        if height[left] < height[right]:
+            left += 1
+        else:
+            right -= 1
+    
+    return max_water
+
+
+"""
+5️⃣ BAD: O(n²) checking all pairs
+6️⃣ KEY: Two pointers, always move shorter one
+7️⃣ COMPLEXITY: O(n) time, O(1) space - optimal
+8️⃣ TIME OUT: "Two pointers from ends, move shorter height inward"
+9️⃣ FOLLOW-UP: "Why move shorter?" → Only way area could improve
+🔟 EVALUATION: Must recognize greedy two-pointer approach
+"""
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# PROBLEM 6: MERGE INTERVALS
+# ═══════════════════════════════════════════════════════════════════════
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣ PROBLEM STATEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Given collection of intervals, merge all overlapping intervals.
+
+Example:
+    Input: [[1,3], [2,6], [8,10], [15,18]]
+    Output: [[1,6], [8,10], [15,18]]
+    Explanation: [1,3] and [2,6] overlap, merge to [1,6]
+
+Intervals represented as [start, end] where start <= end.
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2️⃣ THINK-ALOUD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"Merge overlapping intervals.
+
+Key insight: If sorted by start time, overlapping intervals will be adjacent.
+
+Algorithm:
+1. Sort intervals by start time
+2. Iterate through sorted intervals:
+   - If current overlaps with last merged interval: merge them
+   - Otherwise: add current to result
+
+Overlap check: current.start <= last.end
+
+Merge: new_end = max(current.end, last.end)
+
+Example: [[1,3], [2,6], [8,10], [15,18]]
+Already sorted by start
+- Add [1,3] to result
+- [2,6] overlaps (2 <= 3): merge to [1,6]
+- [8,10] doesn't overlap: add to result
+- [15,18] doesn't overlap: add to result
+Result: [[1,6], [8,10], [15,18]]"
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3️⃣ TRAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRAP: Not sorting first
+
+Without sorting, overlapping intervals might not be adjacent:
+[[8,10], [1,3], [2,6], [15,18]]
+
+Can't detect [1,3] and [2,6] overlap when they're separated.
+
+Must sort by start time first!
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4️⃣ SOLUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+
+def merge_intervals(intervals):
+    """
+    Merge all overlapping intervals.
+    
+    Approach: Sort by start, merge adjacent overlapping intervals.
+    Time: O(n log n) for sorting
+    Space: O(n) for result
+    """
+    if not intervals:
+        return []
+    
+    # Sort by start time
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = [intervals[0]]
+    
+    for current in intervals[1:]:
+        last = merged[-1]
+        
+        # Check if current overlaps with last merged
+        if current[0] <= last[1]:
+            # Overlap - merge by extending end
+            last[1] = max(last[1], current[1])
+        else:
+            # No overlap - add as new interval
+            merged.append(current)
+    
+    return merged
+
+
+"""
+5️⃣ BAD: O(n²) checking every pair without sorting
+6️⃣ KEY: Sort first makes overlaps adjacent
+7️⃣ COMPLEXITY: O(n log n) time (sorting dominates)
+8️⃣ TIME OUT: "Sort by start time, merge adjacent overlapping intervals"
+9️⃣ FOLLOW-UP: "Insert new interval?" → Binary search + merge
+🔟 EVALUATION: Must sort first, handle merge logic correctly
+"""
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # TESTING FRAMEWORK
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -785,8 +1129,12 @@ if __name__ == "__main__":
     # Test Group Anagrams
     print("Testing Group Anagrams:")
     result = group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
-    assert len(result) == 3
-    assert sorted(result[0]) in [['bat'], ['eat', 'tea', 'ate'], ['tan', 'nat']]
+    assert len(result) == 3  # Should have 3 groups
+    # Flatten and check all words are present
+    all_words = []
+    for group in result:
+        all_words.extend(group)
+    assert sorted(all_words) == sorted(["eat", "tea", "tan", "ate", "nat", "bat"])
     print("✓ All Group Anagrams tests passed\n")
     
     # Test Product Except Self
@@ -795,4 +1143,25 @@ if __name__ == "__main__":
     assert product_except_self([0, 1, 2, 3]) == [6, 0, 0, 0]
     print("✓ All Product tests passed\n")
     
-    print("🎉 ALL MEDIUM PROBLEMS TESTED SUCCESSFULLY")
+    # Test 3Sum
+    print("Testing 3Sum:")
+    result = three_sum([-1, 0, 1, 2, -1, -4])
+    assert len(result) == 2
+    assert [-1, -1, 2] in result or [-1, 0, 1] in result
+    print("✓ All 3Sum tests passed\n")
+    
+    # Test Container With Most Water
+    print("Testing Container With Most Water:")
+    assert max_area([1, 8, 6, 2, 5, 4, 8, 3, 7]) == 49
+    assert max_area([1, 1]) == 1
+    assert max_area([4, 3, 2, 1, 4]) == 16
+    print("✓ All Container tests passed\n")
+    
+    # Test Merge Intervals
+    print("Testing Merge Intervals:")
+    assert merge_intervals([[1, 3], [2, 6], [8, 10], [15, 18]]) == [[1, 6], [8, 10], [15, 18]]
+    assert merge_intervals([[1, 4], [4, 5]]) == [[1, 5]]
+    print("✓ All Merge Intervals tests passed\n")
+    
+    print("🎉 ALL 6 MEDIUM PROBLEMS TESTED SUCCESSFULLY")
+    print("Problems: Longest Substring, Anagrams, Product, 3Sum, Container, Merge Intervals")

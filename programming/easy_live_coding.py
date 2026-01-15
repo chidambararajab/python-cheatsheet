@@ -864,6 +864,332 @@ REST OF SECTIONS (abbreviated for space - same structure as above)
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# PROBLEM 4: BEST TIME TO BUY AND SELL STOCK
+# ═══════════════════════════════════════════════════════════════════════
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣ PROBLEM STATEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are given an array where prices[i] is the price of a stock on day i.
+Find the maximum profit you can achieve from one transaction (buy once, sell once).
+You must buy before you sell.
+
+Example 1:
+    Input: prices = [7, 1, 5, 3, 6, 4]
+    Output: 5
+    Explanation: Buy on day 2 (price=1), sell on day 5 (price=6), profit = 6-1 = 5
+
+Example 2:
+    Input: prices = [7, 6, 4, 3, 1]
+    Output: 0
+    Explanation: No profit possible (prices always decreasing)
+
+Constraints:
+- Array length >= 1
+- Cannot sell before buying
+- At most one transaction
+- Return 0 if no profit possible
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2️⃣ THINK-ALOUD FLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"Need maximum profit from one buy-sell transaction. Must buy before sell.
+
+Key insight: For each price, what's the maximum profit if I sell on this day?
+That would be: current_price - minimum_price_seen_so_far
+
+Algorithm:
+- Track minimum price seen so far
+- For each price, calculate profit if selling today
+- Track maximum profit
+
+Example: [7, 1, 5, 3, 6, 4]
+- Day 0: price=7, min=7, profit=0, max_profit=0
+- Day 1: price=1, min=1, profit=0, max_profit=0
+- Day 2: price=5, min=1, profit=4, max_profit=4
+- Day 3: price=3, min=1, profit=2, max_profit=4
+- Day 4: price=6, min=1, profit=5, max_profit=5
+- Day 5: price=4, min=1, profit=3, max_profit=5
+
+Edge cases:
+- Single price: [5] → 0 (can't sell)
+- Decreasing: [5,4,3,2,1] → 0
+- Increasing: [1,2,3,4,5] → 4 (buy at 1, sell at 5)"
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3️⃣ TRAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRAP: Finding max and min in array and subtracting
+
+BAD CODE:
+return max(prices) - min(prices)  # ❌ WRONG!
+
+WHAT BREAKS:
+prices = [7, 1, 5, 3, 6, 4]
+max=7, min=1, difference=6
+
+But we can't sell at 7 and buy at 1 (selling before buying)!
+Correct answer is 5 (buy at 1, sell at 6).
+
+FIX: Must track minimum as we go, ensuring we buy before we sell.
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4️⃣ SOLUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+
+def max_profit(prices):
+    """
+    Find maximum profit from one buy-sell transaction.
+    
+    Approach: Track minimum price seen, calculate profit at each step.
+    Time: O(n) - single pass
+    Space: O(1) - only tracking two variables
+    """
+    if not prices or len(prices) < 2:
+        return 0
+    
+    min_price = float('inf')
+    max_profit = 0
+    
+    for price in prices:
+        # Update minimum price seen so far
+        min_price = min(min_price, price)
+        
+        # Calculate profit if selling today
+        profit = price - min_price
+        
+        # Update maximum profit
+        max_profit = max(max_profit, profit)
+    
+    return max_profit
+
+
+"""
+5️⃣ BAD SOLUTION: O(n²) checking all pairs
+6️⃣ KEY: Track minimum as you go, calculate profit at each step
+7️⃣ COMPLEXITY: O(n) time, O(1) space - optimal
+8️⃣ TIME OUT: "Track minimum price, calculate profit for each day"
+9️⃣ FOLLOW-UP: "Multiple transactions?" → Different problem (dynamic programming)
+🔟 EVALUATION: Must achieve O(n), avoid max-min trap
+"""
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# PROBLEM 5: VALID ANAGRAM
+# ═══════════════════════════════════════════════════════════════════════
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣ PROBLEM STATEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Given two strings s and t, return true if t is an anagram of s.
+
+Example 1:
+    Input: s = "anagram", t = "nagaram"
+    Output: true
+
+Example 2:
+    Input: s = "rat", t = "car"
+    Output: false
+
+Constraints:
+- Only lowercase English letters
+- Different lengths → not anagrams
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2️⃣ THINK-ALOUD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"Anagram means same characters, different order. Multiple approaches:
+
+1. Sort both strings, compare: O(n log n)
+2. Count character frequencies, compare: O(n)
+
+For interview, I'll use counting approach to show O(n) optimization."
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3️⃣ TRAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRAP: Not checking lengths first
+
+If lengths differ, can't be anagram. Check this first for early exit.
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4️⃣ SOLUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+
+def is_anagram(s, t):
+    """
+    Check if two strings are anagrams.
+    
+    Approach: Count character frequencies, compare.
+    Time: O(n), Space: O(1) - at most 26 letters
+    """
+    if len(s) != len(t):
+        return False
+    
+    # Count character frequencies
+    count = {}
+    for char in s:
+        count[char] = count.get(char, 0) + 1
+    
+    # Decrement for t
+    for char in t:
+        if char not in count:
+            return False
+        count[char] -= 1
+        if count[char] < 0:
+            return False
+    
+    return True
+
+
+# Alternative: Using Counter
+from collections import Counter
+
+def is_anagram_counter(s, t):
+    """Using Python's Counter - clean but shows less algorithm understanding"""
+    return Counter(s) == Counter(t)
+
+
+"""
+5️⃣ BAD: sorted(s) == sorted(t) → O(n log n), works but not optimal
+6️⃣ KEY: Character frequency counting
+7️⃣ COMPLEXITY: O(n) time, O(1) space (26 letters max)
+8️⃣ TIME OUT: "Count frequencies, compare counts"
+9️⃣ FOLLOW-UP: "Unicode?" → Same approach, larger space
+🔟 EVALUATION: Must achieve O(n), not just O(n log n) sort
+"""
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# PROBLEM 6: REVERSE LINKED LIST
+# ═══════════════════════════════════════════════════════════════════════
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣ PROBLEM STATEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Reverse a singly linked list.
+
+Example:
+    Input: 1 → 2 → 3 → 4 → 5 → None
+    Output: 5 → 4 → 3 → 2 → 1 → None
+
+Constraints:
+- Do it in-place (modify original list)
+- O(n) time, O(1) space
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2️⃣ THINK-ALOUD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"Reverse linked list - need to flip all pointers.
+
+Approach: Iterate through list, reverse each pointer.
+Need three pointers: prev, current, next
+
+Example: 1 → 2 → 3 → None
+- Start: prev=None, curr=1, next=2
+- Reverse: 1.next = None, prev=1, curr=2
+- Continue: 2.next = 1, prev=2, curr=3
+- Continue: 3.next = 2, prev=3, curr=None
+- Return prev (which is now head)
+
+Must store next before breaking pointer!"
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3️⃣ TRAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRAP: Not saving next before reversing pointer
+
+BAD CODE:
+curr.next = prev  # ❌ Lost reference to rest of list!
+curr = curr.next  # This points to prev now, not next!
+
+FIX: Save next BEFORE reversing:
+next_node = curr.next
+curr.next = prev
+curr = next_node
+"""
+
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4️⃣ SOLUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def reverse_list(head):
+    """
+    Reverse a singly linked list iteratively.
+    
+    Approach: Three pointers - prev, curr, next
+    Reverse each pointer as we traverse.
+    
+    Time: O(n) - visit each node once
+    Space: O(1) - only three pointers
+    """
+    prev = None
+    curr = head
+    
+    while curr:
+        # Save next before breaking pointer
+        next_node = curr.next
+        
+        # Reverse pointer
+        curr.next = prev
+        
+        # Move pointers forward
+        prev = curr
+        curr = next_node
+    
+    # prev is now the new head
+    return prev
+
+
+"""
+5️⃣ BAD: Create new list → O(n) space, doesn't reverse in-place
+6️⃣ KEY: Three pointers, save next before reversing
+7️⃣ COMPLEXITY: O(n) time, O(1) space - optimal
+8️⃣ TIME OUT: "Three pointers: prev, curr, next. Reverse each pointer."
+9️⃣ FOLLOW-UP: "Recursive solution?" → O(n) space for call stack
+🔟 EVALUATION: Must handle pointers correctly, avoid losing references
+"""
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # TESTING FRAMEWORK (To verify solutions)
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -890,4 +1216,29 @@ if __name__ == "__main__":
     assert merge_sorted_lists([1], []) == [1]
     print("✓ All Merge tests passed\n")
     
-    print("🎉 ALL EASY PROBLEMS TESTED SUCCESSFULLY")
+    # Test Max Profit
+    print("Testing Best Time to Buy and Sell Stock:")
+    assert max_profit([7, 1, 5, 3, 6, 4]) == 5
+    assert max_profit([7, 6, 4, 3, 1]) == 0
+    assert max_profit([1, 2, 3, 4, 5]) == 4
+    print("✓ All Max Profit tests passed\n")
+    
+    # Test Valid Anagram
+    print("Testing Valid Anagram:")
+    assert is_anagram("anagram", "nagaram") == True
+    assert is_anagram("rat", "car") == False
+    assert is_anagram("", "") == True
+    print("✓ All Anagram tests passed\n")
+    
+    # Test Reverse Linked List
+    print("Testing Reverse Linked List:")
+    # Create list: 1 → 2 → 3
+    head = ListNode(1, ListNode(2, ListNode(3)))
+    reversed_head = reverse_list(head)
+    assert reversed_head.val == 3
+    assert reversed_head.next.val == 2
+    assert reversed_head.next.next.val == 1
+    print("✓ All Reverse List tests passed\n")
+    
+    print("🎉 ALL 6 EASY PROBLEMS TESTED SUCCESSFULLY")
+    print("Problems: Two Sum, Palindrome, Merge Lists, Stock Profit, Anagram, Reverse List")
