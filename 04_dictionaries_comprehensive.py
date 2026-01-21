@@ -61,7 +61,7 @@ empty2 = dict()
 # From key-value pairs
 pairs = [("a", 1), ("b", 2), ("c", 3)]
 from_pairs = dict(pairs)
-print(f"From pairs: {from_pairs}")
+print(f"From pairs: {from_pairs}")  # {'a': 1, 'b': 2, 'c': 3}
 
 # Dict comprehension (INTERVIEW FAVORITE)
 squares = {x: x**2 for x in range(5)}
@@ -69,13 +69,13 @@ print(f"Squares: {squares}")  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 
 # Conditional dict comprehension
 evens = {x: x**2 for x in range(10) if x % 2 == 0}
-print(f"Even squares: {evens}")
+print(f"Even squares: {evens}")  # {0: 0, 2: 4, 4: 16, 6: 36, 8: 64}
 
 # From two lists (zip pattern)
 keys = ["a", "b", "c"]
 values = [1, 2, 3]
 combined = dict(zip(keys, values))
-print(f"Zipped dict: {combined}")
+print(f"Zipped dict: {combined}")  # {'a': 1, 'b': 2, 'c': 3}
 
 # 🎤 INTERVIEWER NARRATION:
 """
@@ -94,7 +94,7 @@ d = {"a": 1, "b": 2, "c": 3}
 
 # Access with bracket notation
 value = d["a"]
-print(f"d['a'] = {value}")
+print(f"d['a'] = {value}")  # d['a'] = 1
 
 # ❌ TRAP: KeyError if key doesn't exist
 try:
