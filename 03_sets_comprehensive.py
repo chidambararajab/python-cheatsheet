@@ -51,7 +51,7 @@ print(f"Set: {nums}")
 # 🚨 TRAP: Empty set
 empty_dict = {}      # ❌ This is a DICT, not a set!
 empty_set = set()    # ✅ Correct way to create empty set
-print(f"Type of {{}}: {type(empty_dict)}")
+print(f"Type of {{}}: {type(empty_dict)}")  # Type of {}: <class 'dict'>
 
 # From iterable (automatic duplicate removal)
 from_list = set([1, 2, 2, 3, 3, 3, 4])
@@ -62,16 +62,19 @@ print(f"set('hello') = {from_string}")  # {'h', 'e', 'l', 'o'}
 
 # Set comprehension (INTERVIEW FAVORITE)
 squares = {x**2 for x in range(5)}
-print(f"Square set: {squares}")
+print(f"Square set: {squares}")  # {0, 1, 4, 9, 16}
 
 evens = {x for x in range(10) if x % 2 == 0}
-print(f"Even set: {evens}")
+print(f"Even set: {evens}") # {0, 2, 4, 6, 8}
 
 # 🎤 INTERVIEWER NARRATION:
 """
 "I'll convert the list to a set to remove duplicates, then convert back
 to a list. This is O(n) time and more Pythonic than manual deduplication."
 """
+numbers_data = [1, 2, 3, 2, 4, 1, 5]
+unique_numbers = list(set(numbers_data))
+print(f"Unique Numbers: {unique_numbers}")  # [1, 2, 3, 4, 5]
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -120,7 +123,7 @@ print("\n📌 MODIFICATION METHODS:")
 # add(element) - Add single element | O(1)
 nums = {1, 2, 3}
 nums.add(4)
-print(f"After add(4): {nums}")
+print(f"After add(4): {nums}")  # {1, 2, 3, 4}
 
 nums.add(2)  # Duplicate - no effect
 print(f"After add(2): {nums}")  # Still {1, 2, 3, 4}
@@ -135,7 +138,7 @@ print(f"After multiple update: {nums}")
 # remove(element) - Remove element | O(1) | RAISES KeyError if not found
 nums = {1, 2, 3, 4, 5}
 nums.remove(3)
-print(f"After remove(3): {nums}")
+print(f"After remove(3): {nums}")  # {1, 2, 4, 5}
 
 try:
     nums.remove(99)  # ❌ Raises KeyError
@@ -144,7 +147,7 @@ except KeyError:
 
 # discard(element) - Remove element | O(1) | Silent if not found
 nums.discard(99)  # ✅ No error
-print(f"After discard(99): {nums} (no error)")
+print(f"After discard(99): {nums} (no error)")  # {1, 2, 3, 4, 5}
 
 # 🎤 INTERVIEWER NARRATION:
 """
@@ -155,13 +158,13 @@ if the element exists first. discard() is safer - it won't throw an error."
 # pop() - Remove and return arbitrary element | O(1)
 nums = {1, 2, 3, 4, 5}
 popped = nums.pop()
-print(f"Popped {popped}, remaining: {nums}")
+print(f"Popped {popped}, remaining: {nums}")  # Popped 5, remaining: {1, 2, 3, 4}
 
 # ⚠️ Order is arbitrary! Don't rely on it!
 
 # clear() - Remove all elements | O(n)
 nums.clear()
-print(f"After clear(): {nums}")
+print(f"After clear(): {nums}")  # {} (empty set)
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -197,19 +200,19 @@ print(f"A ^ B = {sym_diff1}")      # {1, 2, 3, 6, 7, 8}
 # In-place operations (modify original set)
 A_copy = A.copy()
 A_copy |= B                        # A = A | B
-print(f"A |= B: {A_copy}")
+print(f"A |= B: {A_copy}")  # {1, 2, 3, 4, 5, 6, 7, 8}
 
 A_copy = A.copy()
 A_copy &= B                        # A = A & B
-print(f"A &= B: {A_copy}")
+print(f"A &= B: {A_copy}")  # {1, 2, 3}
 
 A_copy = A.copy()
 A_copy -= B                        # A = A - B
-print(f"A -= B: {A_copy}")
+print(f"A -= B: {A_copy}")  # {4, 5}
 
 A_copy = A.copy()
 A_copy ^= B                        # A = A ^ B
-print(f"A ^= B: {A_copy}")
+print(f"A ^= B: {A_copy}")  # {1, 2, 3, 6, 7, 8}
 
 
 # ═══════════════════════════════════════════════════════════════════════

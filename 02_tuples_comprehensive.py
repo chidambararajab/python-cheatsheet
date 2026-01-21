@@ -63,7 +63,7 @@ is_a_tuple = (5,)      # ✅ Comma makes it a tuple
 print(f"(5,) is type: {type(is_a_tuple)}")  # <class 'tuple'>
 
 # From iterable
-tuple_from_list = tuple([1, 2, 3])
+tuple_from_list = tuple([1, 2, 3])  # (1, 2, 3)
 tuple_from_string = tuple("abc")  # ('a', 'b', 'c')
 print(f"tuple('abc') = {tuple_from_string}")
 
@@ -91,7 +91,7 @@ except AttributeError as e:
 # ✅ CAN create new tuple
 coords = (15, 25)  # Reassignment (not mutation)
 new_coords = coords + (30,)  # Concatenation creates new tuple
-print(f"New coords: {new_coords}")
+print(f"New coords: {new_coords}")  # (15, 25, 30)
 
 # 🎤 INTERVIEWER NARRATION:
 """
@@ -136,12 +136,12 @@ print(f"first={first}, middle={middle}, last={last}")
 
 # Ignoring values with _
 x, _, z = (10, 20, 30)  # Ignore second value
-print(f"x={x}, z={z}")
+print(f"x={x}, z={z}")  # x=10, z=30
 
 # Swapping variables (PYTHONIC WAY)
 a, b = 5, 10
 a, b = b, a  # Swap without temp variable!
-print(f"After swap: a={a}, b={b}")
+print(f"After swap: a={a}, b={b}")  # After swap: a=10, b=5
 
 # Compare with Java:
 """
@@ -196,12 +196,12 @@ print("\n📌 TUPLES AS DICT KEYS:")
 # Graph adjacency with weights
 graph = {
     (0, 1): 5,    # Edge from 0 to 1 with weight 5
-    (0, 2): 3,
-    (1, 2): 2,
-    (2, 3): 7
+    (0, 2): 3,   # Edge from 0 to 2 with weight 3
+    (1, 2): 2,   # Edge from 1 to 2 with weight 2
+    (2, 3): 7    # Edge from 2 to 3 with weight 7
 }
 
-print(f"Weight of edge (0,1): {graph[(0, 1)]}")
+print(f"Weight of edge (0,1): {graph[(0, 1)]}")  # Weight of edge (0,1): 5
 
 # Memoization for 2D DP
 memo = {}
